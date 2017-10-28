@@ -65,3 +65,51 @@ def possible_moves(indeces_arr, arr)
 end 
   
 can_win?([2,0,7,0,2], 2)  
+
+
+# The exercise here is to write a function that takes a single argument (a
+# list of names) and returns a string representing the English-formatted
+# conjunction of those names.
+#
+# For example, given these names: ['Alice', 'Bob', 'Carlos', 'Diana']
+#
+# The output would be: "Alice, Bob, Carlos and Diana"
+#
+# This type of function is useful when building user interfaces that show the
+# list of people in a conversation, for example.
+
+# 1. create empty string 
+# 2. iterate through, not last element inside while loop
+# 3. add "and" and last element 
+
+# Now lets write a function that takes an array and an argument called `limit`. This controls the maximum number of 
+# names that should be displayed.  Any remaining items are "summarized" using the
+# string "and # more".
+#
+# For example, given these names: ['Alice', 'Bob', 'Carlos', 'Diana'] and limit: 2
+#
+# The output would be: "Alice, Bob and 2 more"
+def to_string_with_commas(array, limit = nil) 
+  return "" if array.empty? 
+  return array[0] if array.length == 1
+  
+  if limit && limit > 0 && limit < array.length  
+    leftovers = array.length - limit 
+    return array[0..(limit-1)].join(', ') + ' and ' + leftovers.to_s + ' more'
+  end 
+
+
+  array[0..-2].join(', ') + ' and ' + array[-1]
+end 
+
+
+test_array = ["alice", "lee", 'another', "caroline"]
+test_array2 = ["alice", "parker"]
+
+puts(to_string_with_commas(test_array, 3))
+puts(to_string_with_commas(test_array, 2))
+puts(to_string_with_commas(test_array, 0))
+puts(to_string_with_commas(test_array2, 1))
+puts(to_string_with_commas(['alice'], 0))
+puts(to_string_with_commas([]))
+
