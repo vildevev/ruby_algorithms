@@ -113,3 +113,39 @@ puts(to_string_with_commas(test_array2, 1))
 puts(to_string_with_commas(['alice'], 0))
 puts(to_string_with_commas([]))
 
+
+# Explanation:
+
+# Input: 3 2 1 4 
+# Output: 3
+# Product of elements of initial
+# array 3*2*1*4 = 24. If x = 3 then 3*3*3*3 
+# = 81, if x = 2 then 2*2*2*2 =16. So minimal
+# element = 3.
+
+
+def smallest_product(arr)
+  arr_product = arr.reduce(:*) # O(n)
+  arr.sort! # O(n**2)
+  arr.each do |num| # 0(n)
+    return num if num ** arr.length > arr_product
+  end 
+  'None of the number are larger than product'
+end 
+
+# Runtime: O(n**2)
+
+smallest_product([1,2,5,3])
+
+def smallest_product(arr)
+  sum = arr.reduce(:*) # O(n)
+  current = h[arr.max ** arr.length] = arr.max # O(n)
+  arr.each do |num|
+    if num ** arr.length && num ** arr.length < current
+      current = h[num ** arr.length] = num 
+    end 
+  end 
+  current 
+end 
+
+# Runtime: O(n)
